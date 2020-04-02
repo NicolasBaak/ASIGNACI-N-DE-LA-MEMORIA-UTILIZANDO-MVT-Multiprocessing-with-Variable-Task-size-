@@ -1,4 +1,4 @@
-package controlador;
+package modelo;
 
 public class nodo {
     public controlador dato; 
