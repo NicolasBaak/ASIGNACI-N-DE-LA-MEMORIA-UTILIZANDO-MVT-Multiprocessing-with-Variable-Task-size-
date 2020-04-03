@@ -9,9 +9,12 @@ import modelo.listaDoble;
 
 public class mvt {
     
-    listaDoble listaDoble=new listaDoble(); 
-    listaDoble AuxlistaDoble=new listaDoble();
-
+    listaDoble listaDoble = new listaDoble(); 
+    listaDoble AuxlistaDoble = new listaDoble();
+    listaDoble tal = new listaDoble();
+    listaDoble tp = new listaDoble();
+    
+    
     public mvt(listaDoble lisDoble) {
     this.listaDoble = lisDoble;
     }
