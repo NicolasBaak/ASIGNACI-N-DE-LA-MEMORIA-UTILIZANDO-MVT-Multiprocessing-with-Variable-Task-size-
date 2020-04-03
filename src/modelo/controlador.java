@@ -15,15 +15,70 @@ public class controlador {
     private int tiempoLlegada;
     private int duracion;
     
+    
+    int numero;
+    int localidad;
+    char estado;
+    int orden;
+    int proceso;
+    
     public controlador(){
     }
     
     public controlador(String nombreProceso, int tama, int tiempoLlegada, int duracion){
-    
         this.nombreProceso = nombreProceso;
         this.tama = tama;
         this.tiempoLlegada = tiempoLlegada;
         this.duracion = duracion;
+    }
+    
+    public controlador(int numero, int localidad, int tama, char estado){
+    
+    this.numero = numero;
+    this.localidad = localidad;
+    this.tama = tama;
+    this.estado = estado;
+    }
+
+     public controlador(int numero, int localidad, int tama, char estado, int proceso){
+    
+    this.numero = numero;
+    this.localidad = localidad;
+    this.tama = tama;
+    this.estado = estado;
+    this.proceso = proceso;
+    }
+     
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public void setLocalidad(int localidad) {
+        this.localidad = localidad;
+    }
+
+    public void setEstado(char estado) {
+        this.estado = estado;
+    }
+
+    public void setOrden(int orden) {
+        this.orden = orden;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getLocalidad() {
+        return localidad;
+    }
+
+    public char getEstado() {
+        return estado;
+    }
+
+    public int getOrden() {
+        return orden;
     }
 
     public String getNombreProceso() {

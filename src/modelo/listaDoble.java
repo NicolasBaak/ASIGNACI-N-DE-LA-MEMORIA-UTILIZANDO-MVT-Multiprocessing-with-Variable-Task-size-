@@ -238,10 +238,16 @@ public class listaDoble {
     public String imprimir() {
         String informacion = "";
         nodo actual = cabecera;
-        System.out.println("DATOS INGRESADOS: ");
+        
+        if(actual == null) System.out.println("Esta vacio");     
+        else{
+        System.out.println("DATOS INGRESADOS: \n");
         while (actual != null) {
-            informacion += actual.dato.toString() + "\n";
+            informacion += actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+ " \n";
             actual = actual.siguiente;
+            System.out.println(informacion);
+        }
+        System.out.println("\nFin tabla");
         }
         return informacion;
     }
