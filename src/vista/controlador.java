@@ -7,9 +7,11 @@ package vista;
 
 import javax.swing.table.DefaultTableModel;
 import modelo.listaDoble;
-
+import controlador.mvt;
 public class controlador extends javax.swing.JFrame {
     
+    int TiempoTotal = 29;
+    int numeroPasos = 0;
     DefaultTableModel m;
     DefaultTableModel aux;
     listaDoble listaDoble = new listaDoble();
@@ -88,7 +90,7 @@ public class controlador extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTableTp);
 
         jButtonPaso.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButtonPaso.setText("Paso 1");
+        jButtonPaso.setText("Empezar");
         jButtonPaso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPasoActionPerformed(evt);
@@ -168,7 +170,39 @@ public class controlador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
-        // TODO add your handling code here:
+       
+        if(TiempoTotal > 0){
+        numeroPasos++;    
+        jButtonPaso.setText("Paso "+numeroPasos);
+        
+        //Obtengo los valores de la tabla
+            //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");
+        if(numeroPasos == 1){
+         int totalDatos = jTablePrincipal.getRowCount();
+            for(int i = 0; i < totalDatos; i++){
+                String nombre = jTablePrincipal.getValueAt(i, 0).toString();
+                int tama = Integer.parseInt(jTablePrincipal.getValueAt(i, 1).toString());
+                int tiempoLlegada = Integer.parseInt(jTablePrincipal.getValueAt(i, 2).toString());
+                int duracion = Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
+                //System.out.println("\t"+ nombre +"\t"+ tama +"\t" + tiempoLlegada +"\t" + duracion +"\n\n");
+                modelo.controlador p = new modelo.controlador(nombre ,tama, tiempoLlegada, duracion );
+                listaDoble.insertarFinal(p);
+            }
+            //lista doble insertada en n (aplicar algoritmo mvt)
+            mvt n = new mvt(listaDoble);
+        }
+        
+        
+        
+        TiempoTotal--;   
+        
+        }else if(TiempoTotal == 0){
+         jButtonPaso.setText("Terminado");
+         TiempoTotal--;
+        }        
+        else{
+        System.exit(0);
+        }
     }//GEN-LAST:event_jButtonPasoActionPerformed
 
     /**

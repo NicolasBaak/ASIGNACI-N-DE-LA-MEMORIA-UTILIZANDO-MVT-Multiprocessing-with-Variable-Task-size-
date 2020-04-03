@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 package controlador;
+import modelo.listaDoble;
 
-/**
- *
- * @author nicol
- */
+
 public class mvt {
+    
+    listaDoble listaDoble=new listaDoble(); 
+    listaDoble AuxlistaDoble=new listaDoble();
+
+    public mvt(listaDoble lisDoble) {
+    this.listaDoble = lisDoble;
+    }
+     
     
 }
