@@ -179,22 +179,24 @@ public class controlador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
-       int aux = 0;
-        if(TiempoTotal > 0){
+     
+       mvt n = new mvt(listaDoble);
+       
+        if(n.getFinalizado() == 'f'){
         numeroPasos++;    
-        jButtonPaso.setText("Paso "+numeroPasos);
-        
-         mvt n = new mvt(listaDoble);
-      
-         n.mvt();
+        jButtonPaso.setText("Paso "+ numeroPasos);
          
-         //insertarDatoTablaTal(n.getTal(), aux);
-         aux++;
-        TiempoTotal--;   
-        
-        }else if(TiempoTotal == 0){
-         jButtonPaso.setText("Terminado");
-         TiempoTotal--;
+        n.mvt(numeroPasos);
+         
+        n.finish(n.getFinalizado(), n.getTp());
+        //insertarDatoTablaTal(n.getTal(), aux);
+             
+        }else if(n.getFinalizado() == 't'){
+            
+            //Deben ser aproximadamente 10 pasos para acabar
+         jButtonPaso.setText("Finalizada");
+         n.setFinalizado('x');
+         numeroPasos++;
         }        
         else{
         System.exit(0);
@@ -211,9 +213,11 @@ public class controlador extends javax.swing.JFrame {
                 int tama = Integer.parseInt(jTablePrincipal.getValueAt(i, 1).toString());
                 int tiempoLlegada = Integer.parseInt(jTablePrincipal.getValueAt(i, 2).toString());
                 int duracion = Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
-                //System.out.println("\t"+ nombre +"\t"+ tama +"\t" + tiempoLlegada +"\t" + duracion +"\n\n");
+               // System.out.println("\t"+ nombre +"\t"+ tama +"\t" + tiempoLlegada +"\t" + duracion +"\n\n");
                 modelo.controlador p = new modelo.controlador(nombre ,tama, tiempoLlegada, duracion );
+               // System.out.println(p.getNombreProceso() +" "+p.getTama()+" "+p.getTiempoLlegada()+ " "+p.getDuracion());
                 listaDoble.insertarFinal(p);
+              //  listaDoble.imprimirTablaPrincipal();
             }
             //lista doble insertada en n (aplicar algoritmo mvt)
             

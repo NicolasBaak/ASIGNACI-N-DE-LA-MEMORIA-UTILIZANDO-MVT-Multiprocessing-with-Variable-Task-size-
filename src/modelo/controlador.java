@@ -48,6 +48,14 @@ public class controlador {
     this.estado = estado;
     this.proceso = proceso;
     }
+
+    public void setProceso(int proceso) {
+        this.proceso = proceso;
+    }
+
+    public int getProceso() {
+        return proceso;
+    }
      
     public void setNumero(int numero) {
         this.numero = numero;

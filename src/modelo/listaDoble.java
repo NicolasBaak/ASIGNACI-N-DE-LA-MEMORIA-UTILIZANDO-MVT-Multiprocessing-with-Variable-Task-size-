@@ -235,21 +235,57 @@ public class listaDoble {
 
     }
 
-    public String imprimir() {
+    public void imprimirTal() {
         String informacion = "";
         nodo actual = cabecera;
-        
+           System.out.println("\n-----------------------------------------");
         if(actual == null) System.out.println("Esta vacio");     
         else{
-        System.out.println("DATOS INGRESADOS: \n");
+        System.out.println("DATOS INGRESADOS EN TAL: \n No - Localidad - Tamaño - Estado\n");
         while (actual != null) {
             informacion += actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+ " \n";
             actual = actual.siguiente;
             System.out.println(informacion);
         }
-        System.out.println("\nFin tabla");
+     
         }
-        return informacion;
+           System.out.println("\n-----------------------------------------");
+    
     }
+    public void imprimirTablaPrincipal() {
+        String informacion = "";
+        nodo actual = cabecera;
+           System.out.println("\n-----------------------------------------");
+        if(actual == null) System.out.println("Esta vacio Tabla principal");     
+        else{
+        System.out.println("DATOS INGRESADOS LA TABLA PRINCIPAL: \nProgreso - Tamaño -Tiempo de llegada- Duracion\n");
+        while (actual != null) {
+            informacion = actual.dato.getNombreProceso() + " \t" + actual.dato.getTama() + " \t" + actual.dato.getTiempoLlegada()+ " \t" + actual.dato.getDuracion()+ " \n";
+            System.out.println(informacion);
+            actual = actual.siguiente;
+        
+        }
+     
+        }
+           System.out.println("\n-----------------------------------------");
 
+    }
+    
+    public void imprimirTp() {
+        String informacion = "";
+        nodo actual = cabecera;
+           System.out.println("\n-----------------------------------------");
+        if(actual == null) System.out.println("Esta vacio Tp");     
+        else{
+        System.out.println("DATOS INGRESADOS EN TABLA DE TP: \n No - Localidad - Tamaño - Estado - Progreso\n");
+        while (actual != null) {
+            informacion += actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+" \t"+ actual.dato.getProceso()+ " \n";
+            actual = actual.siguiente;
+            System.out.println(informacion);
+        }
+       
+        }
+           System.out.println("\n-----------------------------------------");
+       
+    }
 }
