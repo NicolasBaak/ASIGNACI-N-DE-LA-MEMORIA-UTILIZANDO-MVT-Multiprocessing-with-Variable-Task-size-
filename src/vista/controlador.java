@@ -194,10 +194,9 @@ public class controlador extends javax.swing.JFrame {
                 // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
                 talListaDoble.insertarFinal(so);
                 // valores.contadortal++;
-                
+          
             }
-            insertarDatoTablaTal(talListaDoble, valores.contadortal);
-            
+                     
             jButtonPaso.setText("Paso " + valores.numeroPasos);
             n.mvt(valores, talListaDoble, tpListaDoble);
             System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
@@ -206,7 +205,8 @@ public class controlador extends javax.swing.JFrame {
             if (valores.i >= 5) {
                 valores.i = 0;
             }
-            insertarDatoTablaTp(tpListaDoble, valores.contadortp-1);
+            insertarDatoTablaTp(tpListaDoble);
+            insertarDatoTablaTal(talListaDoble);
             n.finish(n.getFinalizado(), tpListaDoble);
 
         } else if (n.getFinalizado() == 't') {
@@ -285,10 +285,12 @@ public class controlador extends javax.swing.JFrame {
         });
     }
 
-    public void insertarDatoTablaTal(listaDoble tal, int i) {
+    public void insertarDatoTablaTal(listaDoble tal) {
+     
 
+        vaciarTabla(this.tal); 
+        for(int i = 0; i < tal.size(); i++){
         String datosTal[] = new String[4];
-
         datosTal[0] = String.valueOf(tal.get(i).dato.getNumero());
         //System.out.println(tal.get(i).dato.getNumero());
         datosTal[1] = String.valueOf(tal.get(i).dato.getLocalidad());
@@ -298,11 +300,13 @@ public class controlador extends javax.swing.JFrame {
         datosTal[3] = String.valueOf(tal.get(i).dato.getEstado());
         //System.out.println(tal.get(i).dato.getEstado());
         this.tal.addRow(datosTal);
-
+        }
     }
 
-    public void insertarDatoTablaTp(listaDoble tp, int i) {
-
+    public void insertarDatoTablaTp(listaDoble tp) {
+        
+       // vaciarTabla(this.tp); 
+        for(int i = 0; i < tp.size(); i++){
         String datosTal[] = new String[4];
 
         datosTal[0] = String.valueOf(tp.get(i).dato.getNumero());
@@ -316,8 +320,17 @@ public class controlador extends javax.swing.JFrame {
     //    datosTal[4] = String.valueOf(tp.get(i).dato.getProceso());
         //System.out.println(tp.get(i).dato.getProgreso());
         this.tp.addRow(datosTal);
-
+        }
+        
     }
+    
+    public void vaciarTabla(DefaultTableModel tabla){
+        int numDatos = tabla.getRowCount();
+        for(int i = 0; i< numDatos; i++){
+        this.tp.removeRow(0);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;
     private javax.swing.JLabel jLabelMvt;
