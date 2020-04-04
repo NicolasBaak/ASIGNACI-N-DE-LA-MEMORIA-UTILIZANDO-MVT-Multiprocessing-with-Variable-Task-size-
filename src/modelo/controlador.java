@@ -40,13 +40,14 @@ public class controlador {
     this.estado = estado;
     }
 
-     public controlador(int numero, int localidad, int tama, char estado, int proceso){
+     public controlador(int numero, int localidad, int tama, char estado, int proceso, int duracion){
     
     this.numero = numero;
     this.localidad = localidad;
     this.tama = tama;
     this.estado = estado;
     this.proceso = proceso;
+    this.duracion = duracion;
     }
 
     public void setProceso(int proceso) {

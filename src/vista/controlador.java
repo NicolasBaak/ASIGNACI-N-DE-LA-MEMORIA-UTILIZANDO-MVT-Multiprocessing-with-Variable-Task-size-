@@ -10,13 +10,17 @@ import modelo.listaDoble;
 import controlador.mvt;
 public class controlador extends javax.swing.JFrame {
     
-    int TiempoTotal = 0;
-    int numeroPasos = 0;
+    public int numeroPasos = 0;
+    public int contadortal = 0;
+    public int contadortp = 0;
+    public int ant_contadortal = contadortal;
+    public int i = 0;
     DefaultTableModel tal;
     DefaultTableModel tp;
     DefaultTableModel aux;
     listaDoble listaDoble = new listaDoble();
      
+    
     /**
      * Creates new form vista_principal
      */
@@ -34,9 +38,7 @@ public class controlador extends javax.swing.JFrame {
     public controlador() {
         initComponents();
         tabla();
-        TiempoTotal = DuracionTotal();
-        obtenerDatosTablaPrincipal();
-       
+        obtenerDatosTablaPrincipal();    
         this.setLocationRelativeTo(null);
         
     }
@@ -181,19 +183,27 @@ public class controlador extends javax.swing.JFrame {
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
      
        mvt n = new mvt(listaDoble);
-       
+      
         if(n.getFinalizado() == 'f'){
-        numeroPasos++;    
-        jButtonPaso.setText("Paso "+ numeroPasos);
-         
-        n.mvt(numeroPasos);
-         
-        n.finish(n.getFinalizado(), n.getTp());
-        //insertarDatoTablaTal(n.getTal(), aux);
-             
-        }else if(n.getFinalizado() == 't'){
+            if(numeroPasos == 1){
+            //Inserto el bloque del Sistema operativo
+            modelo.controlador so = new modelo.controlador( 1, 10, 54, 'D');
+            // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
+            n.getTal().insertarFinal(so);
+            //n.getTal().imprimirTal();
+            }  
+        jButtonPaso.setText("Paso " + numeroPasos);
+        n.mvt(numeroPasos, contadortal, contadortp, ant_contadortal, i);
+        numeroPasos++;           
+        
+        ant_contadortal = contadortp;
+     
+        if(i >= 5) i = 0;
             
-            //Deben ser aproximadamente 10 pasos para acabar
+        n.finish(n.getFinalizado(), n.getTp());
+        
+        }else if(n.getFinalizado() == 't'){   
+         //Deben ser aproximadamente 10 pasos para acabar
          jButtonPaso.setText("Finalizada");
          n.setFinalizado('x');
          numeroPasos++;
