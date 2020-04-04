@@ -8,39 +8,42 @@ package vista;
 import javax.swing.table.DefaultTableModel;
 import modelo.listaDoble;
 import controlador.mvt;
+import modelo.valores;
+
 public class controlador extends javax.swing.JFrame {
-    
-    public int numeroPasos = 0;
-    public int contadortal = 0;
-    public int contadortp = 0;
-    public int ant_contadortal = contadortal;
-    public int i = 0;
+
     DefaultTableModel tal;
     DefaultTableModel tp;
     DefaultTableModel aux;
     listaDoble listaDoble = new listaDoble();
-     
-    
+    listaDoble talListaDoble = new listaDoble();
+    listaDoble tpListaDoble = new listaDoble();
+
+    modelo.valores valores = new modelo.valores();
+
     /**
      * Creates new form vista_principal
      */
     public void tabla() {
-        String cabecera[] = {"Numero","Localidad", "Tamaño", "Estado"};
+        String cabecera[] = {"Numero", "Localidad", "Tamaño", "Estado"};
         tal = new DefaultTableModel(null, cabecera);
         jTableTal.setModel(tal);
-        
-        String cabecera2[] = {"Numero","Localidad", "Tamaño", "Estado", "Proceso"};
+
+        String cabecera2[] = {"Numero", "Localidad", "Tamaño", "Estado", "Proceso"};
         tp = new DefaultTableModel(null, cabecera2);
         jTableTp.setModel(tp);
-        
+
     }
-    
+
     public controlador() {
         initComponents();
         tabla();
-        obtenerDatosTablaPrincipal();    
+        obtenerDatosTablaPrincipal();
         this.setLocationRelativeTo(null);
-        
+        valores.numeroPasos = 1;
+        valores.contadortp = 0;
+        valores.ant_contadortal = valores.contadortal;
+        valores.i = 0;
     }
 
     /**
@@ -181,71 +184,71 @@ public class controlador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
-     
-       mvt n = new mvt(listaDoble);
-      
-        if(n.getFinalizado() == 'f'){
-            if(numeroPasos == 1){
-            //Inserto el bloque del Sistema operativo
-            modelo.controlador so = new modelo.controlador( 1, 10, 54, 'D');
-            // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
-            n.getTal().insertarFinal(so);
-            //n.getTal().imprimirTal();
-            }  
-        jButtonPaso.setText("Paso " + numeroPasos);
-        n.mvt(numeroPasos, contadortal, contadortp, ant_contadortal, i);
-        numeroPasos++;           
-        
-        ant_contadortal = contadortp;
-     
-        if(i >= 5) i = 0;
+
+        mvt n = new mvt(listaDoble);
+
+        if (n.getFinalizado() == 'f') {
+            if (valores.numeroPasos == 1) {
+                //Inserto el bloque del Sistema operativo
+                modelo.controlador so = new modelo.controlador(1, 10, 54, 'D');
+                // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
+                talListaDoble.insertarFinal(so);
+                // valores.contadortal++;
+                
+            }
+            insertarDatoTablaTal(talListaDoble, valores.contadortal);
             
-        n.finish(n.getFinalizado(), n.getTp());
-        
-        }else if(n.getFinalizado() == 't'){   
-         //Deben ser aproximadamente 10 pasos para acabar
-         jButtonPaso.setText("Finalizada");
-         n.setFinalizado('x');
-         numeroPasos++;
-        }        
-        else{
-        System.exit(0);
+            jButtonPaso.setText("Paso " + valores.numeroPasos);
+            n.mvt(valores, talListaDoble, tpListaDoble);
+            System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
+            valores.ant_contadortal = valores.contadortp;
+
+            if (valores.i >= 5) {
+                valores.i = 0;
+            }
+            insertarDatoTablaTp(tpListaDoble, valores.contadortp-1);
+            n.finish(n.getFinalizado(), tpListaDoble);
+
+        } else if (n.getFinalizado() == 't') {
+            //Deben ser aproximadamente 10 pasos para acabar
+            jButtonPaso.setText("Finalizada");
+            n.setFinalizado('x');
+            valores.numeroPasos++;
+        } else {
+            System.exit(0);
         }
     }//GEN-LAST:event_jButtonPasoActionPerformed
-    
-    
+
 //Obtengo los valores de la tabla principal
-    public void obtenerDatosTablaPrincipal(){
-     //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
-    int totalDatos = jTablePrincipal.getRowCount();
-            for(int i = 0; i < totalDatos; i++){
-                String nombre = jTablePrincipal.getValueAt(i, 0).toString();
-                int tama = Integer.parseInt(jTablePrincipal.getValueAt(i, 1).toString());
-                int tiempoLlegada = Integer.parseInt(jTablePrincipal.getValueAt(i, 2).toString());
-                int duracion = Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
-               // System.out.println("\t"+ nombre +"\t"+ tama +"\t" + tiempoLlegada +"\t" + duracion +"\n\n");
-                modelo.controlador p = new modelo.controlador(nombre ,tama, tiempoLlegada, duracion );
-               // System.out.println(p.getNombreProceso() +" "+p.getTama()+" "+p.getTiempoLlegada()+ " "+p.getDuracion());
-                listaDoble.insertarFinal(p);
-              //  listaDoble.imprimirTablaPrincipal();
-            }
-            //lista doble insertada en n (aplicar algoritmo mvt)
-            
-           
+    public void obtenerDatosTablaPrincipal() {
+        //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
+        int totalDatos = jTablePrincipal.getRowCount();
+        for (int i = 0; i < totalDatos; i++) {
+            String nombre = jTablePrincipal.getValueAt(i, 0).toString();
+            int tama = Integer.parseInt(jTablePrincipal.getValueAt(i, 1).toString());
+            int tiempoLlegada = Integer.parseInt(jTablePrincipal.getValueAt(i, 2).toString());
+            int duracion = Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
+            // System.out.println("\t"+ nombre +"\t"+ tama +"\t" + tiempoLlegada +"\t" + duracion +"\n\n");
+            modelo.controlador p = new modelo.controlador(nombre, tama, tiempoLlegada, duracion);
+            // System.out.println(p.getNombreProceso() +" "+p.getTama()+" "+p.getTiempoLlegada()+ " "+p.getDuracion());
+            listaDoble.insertarFinal(p);
+            //  listaDoble.imprimirTablaPrincipal();
+        }
+        //lista doble insertada en n (aplicar algoritmo mvt)
+
     }
 
 //Obtengo el tiempo total que tardan todos los procesos (suma de la Duracion) 
-    public int DuracionTotal(){
-     //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
-     int sum = 0;
-     int totalDatos = jTablePrincipal.getRowCount();
-            for(int i = 0; i < totalDatos; i++){
-               sum += Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());      
-            }
-    return sum;
+    public int DuracionTotal() {
+        //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
+        int sum = 0;
+        int totalDatos = jTablePrincipal.getRowCount();
+        for (int i = 0; i < totalDatos; i++) {
+            sum += Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
+        }
+        return sum;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -281,38 +284,39 @@ public class controlador extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    public void insertarDatoTablaTal(listaDoble tal, int i){
-    
-    String datosTal[] = new String[4];
-    
-    datosTal[0]= String.valueOf(tal.get(i).dato.getNumero());
+
+    public void insertarDatoTablaTal(listaDoble tal, int i) {
+
+        String datosTal[] = new String[4];
+
+        datosTal[0] = String.valueOf(tal.get(i).dato.getNumero());
         //System.out.println(tal.get(i).dato.getNumero());
-    datosTal[1] = String.valueOf(tal.get(i).dato.getLocalidad());
+        datosTal[1] = String.valueOf(tal.get(i).dato.getLocalidad());
         //System.out.println(tal.get(i).dato.getLocalidad());
-    datosTal[2] = String.valueOf(tal.get(i).dato.getTama());
+        datosTal[2] = String.valueOf(tal.get(i).dato.getTama());
         //System.out.println(tal.get(i).dato.getTama());
-    datosTal[3] = String.valueOf(tal.get(i).dato.getEstado());
+        datosTal[3] = String.valueOf(tal.get(i).dato.getEstado());
         //System.out.println(tal.get(i).dato.getEstado());
-    this.tal.addRow(datosTal); 
-    
+        this.tal.addRow(datosTal);
+
     }
-    
-    public void insertarDatoTablaTp(listaDoble tp, int i){
-    
-    String datosTal[] = new String[4];
-    
-    datosTal[0]= String.valueOf(tp.get(i).dato.getNumero());
+
+    public void insertarDatoTablaTp(listaDoble tp, int i) {
+
+        String datosTal[] = new String[4];
+
+        datosTal[0] = String.valueOf(tp.get(i).dato.getNumero());
         //System.out.println(tp.get(i).dato.getNumero());
-    datosTal[1] = String.valueOf(tp.get(i).dato.getLocalidad());
+        datosTal[1] = String.valueOf(tp.get(i).dato.getLocalidad());
         //System.out.println(tp.get(i).dato.getLocalidad());
-    datosTal[2] = String.valueOf(tp.get(i).dato.getTama());
+        datosTal[2] = String.valueOf(tp.get(i).dato.getTama());
         //System.out.println(tp.get(i).dato.getTama());
-    datosTal[3] = String.valueOf(tp.get(i).dato.getEstado());
+        datosTal[3] = String.valueOf(tp.get(i).dato.getEstado());
         //System.out.println(tp.get(i).dato.getEstado());
-    this.tp.addRow(datosTal); 
-    
+    //    datosTal[4] = String.valueOf(tp.get(i).dato.getProceso());
+        //System.out.println(tp.get(i).dato.getProgreso());
+        this.tp.addRow(datosTal);
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;

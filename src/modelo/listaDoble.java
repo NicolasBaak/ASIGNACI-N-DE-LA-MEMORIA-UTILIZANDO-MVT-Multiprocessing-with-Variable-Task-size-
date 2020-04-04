@@ -239,7 +239,7 @@ public class listaDoble {
         String informacion = "";
         nodo actual = cabecera;
            System.out.println("\n-----------------------------------------");
-        if(actual == null) System.out.println("Esta vacio");     
+        if(actual == null) System.out.println("Esta vacia la tabla tal");     
         else{
         System.out.println("DATOS INGRESADOS EN TAL: \n No - Localidad - Tamaño - Estado\n");
         while (actual != null) {
