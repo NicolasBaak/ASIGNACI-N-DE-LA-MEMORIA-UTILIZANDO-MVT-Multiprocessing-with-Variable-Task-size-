@@ -24,7 +24,7 @@ public class mvt {
     
         //Inserto el bloque del Sistema operativo
         modelo.controlador so = new modelo.controlador( 1, 10, 54, 'D');
-        System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
+       // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
         tal.insertarFinal(so);
           
         tal.imprimir();
