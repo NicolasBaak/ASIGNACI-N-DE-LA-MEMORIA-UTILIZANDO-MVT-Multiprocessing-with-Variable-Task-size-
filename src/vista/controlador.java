@@ -200,7 +200,7 @@ public class controlador extends javax.swing.JFrame {
             jButtonPaso.setText("Paso " + valores.numeroPasos);
             n.mvt(valores, talListaDoble, tpListaDoble);
             System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
-            valores.ant_contadortal = valores.contadortp;
+           
 
             if (valores.i >= 5) {
                 valores.i = 0;
@@ -305,9 +305,9 @@ public class controlador extends javax.swing.JFrame {
 
     public void insertarDatoTablaTp(listaDoble tp) {
         
-       // vaciarTabla(this.tp); 
+        vaciarTabla(this.tp); 
         for(int i = 0; i < tp.size(); i++){
-        String datosTal[] = new String[4];
+        String datosTal[] = new String[5];
 
         datosTal[0] = String.valueOf(tp.get(i).dato.getNumero());
         //System.out.println(tp.get(i).dato.getNumero());
@@ -317,7 +317,7 @@ public class controlador extends javax.swing.JFrame {
         //System.out.println(tp.get(i).dato.getTama());
         datosTal[3] = String.valueOf(tp.get(i).dato.getEstado());
         //System.out.println(tp.get(i).dato.getEstado());
-    //    datosTal[4] = String.valueOf(tp.get(i).dato.getProceso());
+        datosTal[4] = String.valueOf(tp.get(i).dato.getDuracion());
         //System.out.println(tp.get(i).dato.getProgreso());
         this.tp.addRow(datosTal);
         }
@@ -327,7 +327,7 @@ public class controlador extends javax.swing.JFrame {
     public void vaciarTabla(DefaultTableModel tabla){
         int numDatos = tabla.getRowCount();
         for(int i = 0; i< numDatos; i++){
-        this.tp.removeRow(0);
+        tabla.removeRow(0);
         }
     }
     
