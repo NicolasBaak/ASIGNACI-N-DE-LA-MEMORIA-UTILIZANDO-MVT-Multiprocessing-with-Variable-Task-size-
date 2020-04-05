@@ -18,9 +18,8 @@ public class controlador extends javax.swing.JFrame {
     listaDoble listaDoble = new listaDoble();
     listaDoble talListaDoble = new listaDoble();
     listaDoble tpListaDoble = new listaDoble();
-
-    modelo.valores valores = new modelo.valores();
-
+    valores valores = new modelo.valores();
+    
     /**
      * Creates new form vista_principal
      */
@@ -183,18 +182,17 @@ public class controlador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        mvt n = new mvt(listaDoble);
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
 
-        mvt n = new mvt(listaDoble);
-
+        
         if (n.getFinalizado() == 'f') {
             if (valores.numeroPasos == 1) {
                 //Inserto el bloque del Sistema operativo
                 modelo.controlador so = new modelo.controlador(1, 10, 54, 'D');
                 // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
                 talListaDoble.insertarFinal(so);
-                // valores.contadortal++;
-          
+                // valores.contadortal++;         
             }
                      
             jButtonPaso.setText("Paso " + valores.numeroPasos);
@@ -234,19 +232,6 @@ public class controlador extends javax.swing.JFrame {
             listaDoble.insertarFinal(p);
             //  listaDoble.imprimirTablaPrincipal();
         }
-        //lista doble insertada en n (aplicar algoritmo mvt)
-
-    }
-
-//Obtengo el tiempo total que tardan todos los procesos (suma de la Duracion) 
-    public int DuracionTotal() {
-        //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
-        int sum = 0;
-        int totalDatos = jTablePrincipal.getRowCount();
-        for (int i = 0; i < totalDatos; i++) {
-            sum += Integer.parseInt(jTablePrincipal.getValueAt(i, 3).toString());
-        }
-        return sum;
     }
 
     /**
@@ -286,8 +271,7 @@ public class controlador extends javax.swing.JFrame {
     }
 
     public void insertarDatoTablaTal(listaDoble tal) {
-     
-
+ 
         vaciarTabla(this.tal); 
         for(int i = 0; i < tal.size(); i++){
         String datosTal[] = new String[4];
