@@ -4,46 +4,81 @@ import modelo.listaDoble;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import sun.awt.windows.ThemeReader;
 
-public class dibujos extends javax.swing.JPanel {
-    String nombre;
+public class hilos extends javax.swing.JPanel {
+
+     String nombre;
     int cont=0;
     listaDoble listaDoble=new listaDoble();
-  
-    public dibujos(int cont,listaDoble listaDoble) {
+    
+    public hilos(int cont,listaDoble listaDoble) {
         initComponents();
         this.setOpaque(true);
         this.setSize(new Dimension(20,1000));
         this.setPreferredSize(new Dimension(20, 1000));
         this.setBackground(Color.LIGHT_GRAY);
-        this.cont = cont;
+        this.cont=cont;
         this.listaDoble=listaDoble;
     }
     
      public void paint(Graphics g){
-        super.paint(g);
-        g.setColor(Color.BLUE);        
-        int disNodo = 30, aumentoNodo = 80;
-        int disNombre = 77,aumentoNombre=120;
+    super.paint(g);
+        
+        int disNodo = 30,aumentoNodo = 80;
+        
+        int disNombre = 40,aumentoNombre= 82;
         
         for (int i = 0; i < cont; i++) {
+        
+            if(i == 0) g.setColor(Color.BLUE);
             //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
-            g.setColor(Color.BLUE);
-            g.fillRect(disNodo,40, 150, 75);
+            else g.setColor(Color.GRAY);
+            g.fillRect(50, disNodo , 160, 70);
             disNodo += aumentoNodo;
             
             this.setSize(disNodo+200, 21);
                                     
-            g.setColor(Color.black);
-            g.drawString(listaDoble.get(i).dato.getNombreProceso(), disNombre, 60);
+            g.setColor(Color.black); 
+            g.drawString(String.valueOf(disNodo), 30, disNodo-10);
+            g.drawString(listaDoble.get(i).dato.getNombreProceso(), 30, disNombre);
             
+//            g.setColor(Color.orange);
+//            g.drawString(String.valueOf(tiempoespera), disNombre, 190);
             this.repaint();
 
-            disNombre += aumentoNombre;   
+            disNombre += aumentoNombre;
+        
+            
+            
         }
+        disNombre=50;
+        aumentoNombre=115;
+            int t = 0;
+            double r=0;
+            int tiempoespera=0;
+            for(int j=0;j<listaDoble.size();j++){
+                if(j==0){
+                  tiempoespera+=listaDoble.get(j).dato.getLocalidad()+listaDoble.get(j).dato.getTama();
+                  t = listaDoble.get(j).dato.getLocalidad();
+                  g.setColor(Color.orange);
+                  g.drawString(String.valueOf(t), disNombre, 150);
+                }else{
+                    g.setColor(Color.orange);
+                    g.drawString(String.valueOf(tiempoespera), disNombre, 150);
+                    tiempoespera+=listaDoble.get(j).dato.getLocalidad();
+                }  
+                disNombre += aumentoNombre;
+            }
+        g.setColor(Color.orange);
+        g.drawString(String.valueOf(tiempoespera), disNombre, 150);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

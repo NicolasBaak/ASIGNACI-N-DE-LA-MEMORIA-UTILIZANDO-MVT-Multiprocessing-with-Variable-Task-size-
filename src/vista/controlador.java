@@ -8,6 +8,7 @@ package vista;
 import javax.swing.table.DefaultTableModel;
 import modelo.listaDoble;
 import controlador.mvt;
+import java.awt.Color;
 import modelo.valores;
 
 public class controlador extends javax.swing.JFrame {
@@ -31,7 +32,6 @@ public class controlador extends javax.swing.JFrame {
         String cabecera2[] = {"Numero", "Localidad", "Tamaño", "Estado", "Proceso"};
         tp = new DefaultTableModel(null, cabecera2);
         jTableTp.setModel(tp);
-
     }
 
     public controlador() {
@@ -43,6 +43,9 @@ public class controlador extends javax.swing.JFrame {
         valores.contadortp = 0;
         valores.ant_contadortal = valores.contadortal;
         valores.i = 0;
+        
+        jScrollGrafico.setViewportView(new hilos(listaDoble.size(), listaDoble));
+  
     }
 
     /**
@@ -64,11 +67,13 @@ public class controlador extends javax.swing.JFrame {
         jLabelMvt = new javax.swing.JLabel();
         jLabelTal = new javax.swing.JLabel();
         jLabelTp = new javax.swing.JLabel();
-        jScrollPaneGraficos = new javax.swing.JScrollPane();
+        jScrollGrafico = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTablePrincipal.setBackground(new java.awt.Color(204, 255, 204));
         jTablePrincipal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTablePrincipal.setForeground(new java.awt.Color(0, 0, 0));
         jTablePrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"A", "8", "1", "7"},
@@ -81,8 +86,11 @@ public class controlador extends javax.swing.JFrame {
                 "Proceso", "Tamaño", "Tiempo de llegada", "Title 4Duración (Tiempo en que finaliza)"
             }
         ));
+        jTablePrincipal.setAlignmentX(1.0F);
         jScrollPane1.setViewportView(jTablePrincipal);
 
+        jTableTal.setBackground(new java.awt.Color(204, 255, 204));
+        jTableTal.setForeground(new java.awt.Color(0, 0, 0));
         jTableTal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -91,8 +99,11 @@ public class controlador extends javax.swing.JFrame {
 
             }
         ));
+        jTableTal.setToolTipText("");
         jScrollPane2.setViewportView(jTableTal);
 
+        jTableTp.setBackground(new java.awt.Color(204, 255, 204));
+        jTableTp.setForeground(new java.awt.Color(0, 0, 0));
         jTableTp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -145,7 +156,7 @@ public class controlador extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelTp)
                                         .addGap(142, 142, 142)))
-                                .addComponent(jScrollPaneGraficos, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(101, 101, 101))))
@@ -164,7 +175,7 @@ public class controlador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneGraficos, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,7 +217,7 @@ public class controlador extends javax.swing.JFrame {
             insertarDatoTablaTp(tpListaDoble);
             insertarDatoTablaTal(talListaDoble);
            finalizado = n.finish(n.getFinalizado(), tpListaDoble);
-
+       
         } else if (finalizado  == 't') {
             //Deben ser aproximadamente 10 pasos para acabar
             jButtonPaso.setText("Finalizada");
@@ -285,7 +296,7 @@ public class controlador extends javax.swing.JFrame {
         //System.out.println(tal.get(i).dato.getEstado());
         this.tal.addRow(datosTal);
         }
-    }
+     }
 
     public void insertarDatoTablaTp(listaDoble tp) {
         
@@ -314,16 +325,20 @@ public class controlador extends javax.swing.JFrame {
         tabla.removeRow(0);
         }
     }
-    
+    public void actualizarGrafico(listaDoble tal, listaDoble tp)
+    {
+           jScrollGrafico.setBackground(Color.lightGray);
+           jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;
     private javax.swing.JLabel jLabelMvt;
     private javax.swing.JLabel jLabelTal;
     private javax.swing.JLabel jLabelTp;
+    private javax.swing.JScrollPane jScrollGrafico;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPaneGraficos;
     private javax.swing.JTable jTablePrincipal;
     private javax.swing.JTable jTableTal;
     private javax.swing.JTable jTableTp;
