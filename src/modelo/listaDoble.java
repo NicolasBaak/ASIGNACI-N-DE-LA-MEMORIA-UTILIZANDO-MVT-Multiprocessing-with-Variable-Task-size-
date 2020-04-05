@@ -243,7 +243,7 @@ public class listaDoble {
         else{
         System.out.println("DATOS INGRESADOS EN TAL: \n No - Localidad - Tamaño - Estado\n");
         while (actual != null) {
-            informacion += actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+ " \n";
+            informacion = actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+ " \n";
             actual = actual.siguiente;
             System.out.println(informacion);
         }
@@ -279,7 +279,7 @@ public class listaDoble {
         else{
         System.out.println("DATOS INGRESADOS EN TABLA DE TP: \n No - Localidad - Tamaño - Estado - Progreso\n");
         while (actual != null) {
-            informacion += actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+" \t"+ actual.dato.getProceso()+ " \n";
+            informacion = actual.dato.getNumero() + " \t" + actual.dato.getLocalidad() + " \t" + actual.dato.getTama()+ " \t" + actual.dato.getEstado()+" \t"+ actual.dato.getProceso()+ " \n";
             actual = actual.siguiente;
             System.out.println(informacion);
         }

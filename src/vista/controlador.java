@@ -19,7 +19,7 @@ public class controlador extends javax.swing.JFrame {
     listaDoble talListaDoble = new listaDoble();
     listaDoble tpListaDoble = new listaDoble();
     valores valores = new modelo.valores();
-    
+    char finalizado = 'f';
     /**
      * Creates new form vista_principal
      */
@@ -186,7 +186,7 @@ public class controlador extends javax.swing.JFrame {
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
 
         
-        if (n.getFinalizado() == 'f') {
+        if (finalizado  == 'f') {
             if (valores.numeroPasos == 1) {
                 //Inserto el bloque del Sistema operativo
                 modelo.controlador so = new modelo.controlador(1, 10, 54, 'D');
@@ -205,12 +205,12 @@ public class controlador extends javax.swing.JFrame {
             }
             insertarDatoTablaTp(tpListaDoble);
             insertarDatoTablaTal(talListaDoble);
-            n.finish(n.getFinalizado(), tpListaDoble);
+           finalizado = n.finish(n.getFinalizado(), tpListaDoble);
 
-        } else if (n.getFinalizado() == 't') {
+        } else if (finalizado  == 't') {
             //Deben ser aproximadamente 10 pasos para acabar
             jButtonPaso.setText("Finalizada");
-            n.setFinalizado('x');
+            finalizado  = 'x';
             valores.numeroPasos++;
         } else {
             System.exit(0);
