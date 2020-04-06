@@ -25,17 +25,13 @@ public class mvt {
             int au = 0;
             
             while(listaDoble.get(v.i).dato.getTama()> tal.get(au).dato.getTama()) {
-                avanzaTiempo(tp, tal, v);  
-                System.out.println("----Estoy en el while-----\n listaDoble tama = "+listaDoble.get(v.i).dato.getTama() + " - Tal tama"+tal.get(au).dato.getTama());
+               avanzaTiempo(tp, tal, v);  
                 for( int i = 0; i < tal.size(); i++){
                     if(tal.get(i).dato.getTama() >=  listaDoble.get(v.i).dato.getTama()) 
                     {
                     au = i;
-                        System.out.println(" tama en el if ="+tal.get(au).dato.getTama() );
-                        System.out.println("au = "+au);
                     }
                 }
-                tal.imprimirTal();
             }
 
             if (v.contadortal == v.ant_contadortal) {
@@ -56,15 +52,11 @@ public class mvt {
 
                 modelo.controlador a = new modelo.controlador(numero, localidad, tamaño, estado, proceso, duracion);
                 tp.insertarFinal(a);
+                v.contadortp++;
             }
-            //System.out.println("Ingresado una fila en la tabla tp: aux2 ="+v.contadortp);
-            // System.out.println(tp.get(v.contadortp).dato.getNumero() + " \t" +tp.get(v.contadortp).dato.getLocalidad()+ " \t"+ tp.get(v.contadortp).dato.getTama() + " \t"+ tp.get(v.contadortp).dato.getEstado()+" \t"+ tp.get(v.contadortp).dato.getProceso()+" \t"+ tp.get(v.contadortp).dato.getDuracion()+"\n\n");
-            v.contadortp++;
 
             avanzaTiempo(tp, tal, v);
             v.ant_contadortal = v.contadortal;
-            //aux1_ant = aux1;
-            //aux2++;
             v.i++;
             
         }
@@ -82,7 +74,7 @@ public class mvt {
 
             if (tp.get(i).dato.getDuracion() == 0) {
                 if (tp.get(i).dato.getEstado() == 'A') {
-                    ++v.contadortal;
+                    v.contadortal++;
                     tp.get(i).dato.setEstado('D');
                     modelo.controlador a = new modelo.controlador(v.contadortal+1, tp.get(i).dato.getLocalidad(), tp.get(i).dato.getTama(), 'D');
                     tal.insertarFinal(a);

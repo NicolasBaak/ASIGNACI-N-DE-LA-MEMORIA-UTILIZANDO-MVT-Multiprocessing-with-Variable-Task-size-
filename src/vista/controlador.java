@@ -224,68 +224,129 @@ public class controlador extends javax.swing.JFrame {
         mvt n = new mvt(listaDoble);
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
 
-        
+                  
         if (finalizado  == 'f') {
-            
-                     
+             
             jButtonPaso.setText("Paso " + valores.numeroPasos);
             n.mvt(valores, talListaDoble, tpListaDoble);
-            System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
-           
-
+           // System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
+            
             if (valores.i >= 5) {
                 valores.i = 0;
             }
+            eliminAreasLibres(talListaDoble);
+            eliminAreasLibresIguales( talListaDoble);   
             insertarDatoTablaTp(tpListaDoble);
             insertarDatoTablaTal(talListaDoble);
             finalizado = n.finish(n.getFinalizado(), tpListaDoble);
             //actualizarGrafico(talListaDoble, tpListaDoble);
-            eliminAreasLibres(talListaDoble);  
+         
+             
             jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
         
-        } else if (finalizado  == 't') {
-            //Deben ser aproximadamente 10 pasos para acabar
-             eliminAreasLibres(talListaDoble);
+        } else if (finalizado  == 't') {      
+            avanzaTiempo(tpListaDoble,talListaDoble, valores);
+             eliminAreasLibresIguales( talListaDoble);   
+             insertarDatoTablaTal(talListaDoble);
+             
             jButtonPaso.setText("Finalizada");
             finalizado  = 'x';
             valores.numeroPasos++;
         } else {
+                avanzaTiempo(tpListaDoble,talListaDoble, valores);
+             eliminAreasLibresIguales( talListaDoble);   
+             insertarDatoTablaTal(talListaDoble);
+             
             System.exit(0);
-        }
+        }        
     }//GEN-LAST:event_jButtonPasoActionPerformed
+public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
 
-    public void eliminAreasLibres(listaDoble tal){
+        for (int i = 0; i < tp.size(); i++) {
+            if (tp.get(i).dato.getDuracion() > 0) {
+                tp.get(i).dato.setDuracion(tp.get(i).dato.getDuracion() - 1);
+            }
+
+            if (tp.get(i).dato.getDuracion() == 0) {
+                if (tp.get(i).dato.getEstado() == 'A') {
+                    v.contadortal++;
+                    tp.get(i).dato.setEstado('D');
+                    modelo.controlador a = new modelo.controlador(v.contadortal+1, tp.get(i).dato.getLocalidad(), tp.get(i).dato.getTama(), 'D');
+                    tal.insertarFinal(a);
+                    
+                }
+
+            }
+
+        }
+
+    }
+    public void eliminAreasLibresIguales(listaDoble tal){
     
         for(int i = 0; i < tal.size(); i++){
-            
-            
-                  
+              
             if(tal.size() > 0){
               for(int j = 1; j < tal.size(); j++){
-                                    
-                  if(tal.get(j).dato.getTama() == 0){
-                  tal.eliminarEntreNodos(j);
-                  --valores.contadortal;                  
-                  }
 
-                  if(tal.get(i).dato.getLocalidad() == (tal.get(j).dato.getLocalidad()+tal.get(j).dato.getTama()) || tal.get(j).dato.getLocalidad() == (tal.get(i).dato.getLocalidad()+tal.get(i).dato.getTama())){
                   int numero;
                   int localidad;
                   int tama;
                   char estado = 'D';
-                  
-                  if(tal.get(i).dato.getLocalidad() > tal.get(j).dato.getLocalidad())
-                    localidad = tal.get(j).dato.getLocalidad();
-                  else
+                 
+                  if(tal.get(i).dato.getLocalidad() == tal.get(j).dato.getLocalidad() && tal.get(i).dato.getNumero() != tal.get(j).dato.getNumero()){
+                      System.out.println("Entre para eliminar unas localidades iguales ");
                     localidad = tal.get(i).dato.getLocalidad();
+                    if(tal.get(i).dato.getTama() > tal.get(i).dato.getTama())
+                      tama = tal.get(i).dato.getTama();
+                    else
+                      tama = tal.get(j).dato.getTama();
+                    
+                    if(tal.get(i).dato.getNumero() > tal.get(i).dato.getNumero())
+                        numero = tal.get(i).dato.getNumero();
+                    else
+                        numero = tal.get(i).dato.getNumero();
+                    
+                    modelo.controlador a = new modelo.controlador(numero, localidad, tama, estado);
+                   
+                   tal.insertarFinal(a); 
+                   tal.eliminarEntreNodos(j);
+                   tal.eliminarEntreNodos(i); 
+                  --valores.contadortal;
+                  }
+              }  
+            } 
+        }    
+    }
+    
+    public void eliminAreasLibres(listaDoble tal){
+    
+        for(int i = 0; i < tal.size(); i++){
+                
+            if(tal.size() > 0){
+              for(int j = 1; j < tal.size(); j++){
+                                    
+//                  if(tal.get(j).dato.getTama() == 0){
+//                  tal.eliminarEntreNodos(j);
+//                  --valores.contadortal;                  
+//                  }
+                  int numero;
+                  int localidad;
+                  int tama;
+                  char estado = 'D';
+                 
+                  
+                  if(tal.get(i).dato.getLocalidad() == (tal.get(j).dato.getLocalidad()+tal.get(j).dato.getTama()) || tal.get(j).dato.getLocalidad() == (tal.get(i).dato.getLocalidad()+tal.get(i).dato.getTama())){                 
+                    if(tal.get(i).dato.getLocalidad() > tal.get(j).dato.getLocalidad())
+                        localidad = tal.get(j).dato.getLocalidad();
+                    else
+                        localidad = tal.get(i).dato.getLocalidad();
                   
                   tama = tal.get(i).dato.getTama() + tal.get(j).dato.getTama();
-                  
-                  
-                 if(tal.get(i).dato.getNumero() > tal.get(j).dato.getNumero())
-                    numero = tal.get(j).dato.getNumero();
-                  else
-                    numero = tal.get(i).dato.getNumero();
+                
+                    if(tal.get(i).dato.getNumero() > tal.get(j).dato.getNumero())
+                        numero = tal.get(j).dato.getNumero();
+                    else
+                        numero = tal.get(i).dato.getNumero();
                    
                    modelo.controlador a = new modelo.controlador(numero, localidad, tama, estado);
                    
@@ -296,8 +357,7 @@ public class controlador extends javax.swing.JFrame {
                   }
               }  
             } 
-        }
-    
+        }    
     }
 //Obtengo los valores de la tabla principal
     public void obtenerDatosTablaPrincipal() {
