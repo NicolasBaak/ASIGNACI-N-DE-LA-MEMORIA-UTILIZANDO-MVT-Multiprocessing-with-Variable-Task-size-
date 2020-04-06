@@ -11,39 +11,108 @@ public class dibujos extends javax.swing.JPanel {
     String nombre;
     int cont=0;
     listaDoble listaDoble=new listaDoble();
-  
+    listaDoble tal = new listaDoble();
+    listaDoble tp = new listaDoble();
+    
     public dibujos(int cont,listaDoble listaDoble) {
+        initComponents();
+        this.setOpaque(true);
+        this.setSize(new Dimension(20,1000));
+        this.setPreferredSize(new Dimension(20, 1000));
+       // this.setBackground(Color.LIGHT_GRAY);
+        this.cont = cont;
+        this.listaDoble=listaDoble;
+    }
+     public dibujos(int cont,listaDoble tal, listaDoble tp) {
         initComponents();
         this.setOpaque(true);
         this.setSize(new Dimension(20,1000));
         this.setPreferredSize(new Dimension(20, 1000));
         this.setBackground(Color.LIGHT_GRAY);
         this.cont = cont;
-        this.listaDoble=listaDoble;
+        this.tal = tal;
+        this.tp = tp;
+        
     }
     
+//     public void paint(Graphics g){
+//        super.paint(g);
+//        g.setColor(Color.BLUE);        
+//        int disNodo = 30, aumentoNodo = 80;
+//        int disNombre = 40,aumentoNombre = 82;
+//        
+//        for (int i = 0; i < cont; i++) {
+//            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
+//            g.setColor(Color.BLUE);
+//            
+//            g.fillRect(50, disNodo, 160, 70);
+//            disNodo += aumentoNodo;
+//            
+//            this.setSize(disNodo+200, 21);
+//                                    
+//            g.setColor(Color.black);
+//            g.drawString(listaDoble.get(i).dato.getNombreProceso(), 30, disNodo);
+//            
+//            this.repaint();
+//
+//            disNombre += aumentoNombre;   
+//        }
+//    }
+    
      public void paint(Graphics g){
-        super.paint(g);
-        g.setColor(Color.BLUE);        
-        int disNodo = 30, aumentoNodo = 80;
-        int disNombre = 77,aumentoNombre=120;
+      super.paint(g);
         
-        for (int i = 0; i < cont; i++) {
-            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
+        int disNodo = 15,aumentoNodo = 75;       
+        int disNombre = 20,aumentoNombre= 80;
+        int disNombreProceso = 50,aumentoNombreProceso= 80;
+        
+        if(tal.size() == 0){
             g.setColor(Color.BLUE);
-            g.fillRect(disNodo,40, 150, 75);
-            disNodo += aumentoNodo;
+            g.fillRect(50, disNodo , 160, 70);
             
-            this.setSize(disNodo+200, 21);
-                                    
-            g.setColor(Color.black);
-            g.drawString(listaDoble.get(i).dato.getNombreProceso(), disNombre, 60);
+            this.setSize(disNodo+200, 21); 
             
-            this.repaint();
-
-            disNombre += aumentoNombre;   
+            g.setColor(Color.black); 
+           // g.drawString(String.valueOf(disNodo), 30, disNodo-10);
+            g.drawString("0", 30, disNombre);
+            g.setColor(Color.white);
+            g.drawString("SO", 120, disNombreProceso);
+            disNodo +=  aumentoNodo;
+            disNombre += aumentoNombre;
+            
+            g.setColor(Color.GRAY);
+            g.fillRect(50, disNodo , 160, 340);
+            
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black); 
+            //g.drawString(String.valueOf(disNodo), 30,100);
+            g.drawString("10", 30, disNombre); 
+            g.drawString("64", 30, 420);
+        }else{
+            g.setColor(Color.BLUE);
+            g.fillRect(50, disNodo , 160, 70 +tal.get(0).dato.getTama());
+            
+            this.setSize(disNodo+200, 21); 
+            
+            g.setColor(Color.black); 
+           // g.drawString(String.valueOf(disNodo), 30, disNodo-10);
+            g.drawString("0", 30, disNombre);
+            g.setColor(Color.white);
+            g.drawString("SO", 120, disNombreProceso);
+            disNodo +=  aumentoNodo;
+            disNombre += aumentoNombre;
+            
+            g.setColor(Color.GRAY);
+            g.fillRect(50, disNodo , 160, 340);
+            
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black); 
+            //g.drawString(String.valueOf(disNodo), 30,100);
+            g.drawString("10", 30, disNombre); 
+            g.drawString("64", 30, 420);
+        
         }
-    }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

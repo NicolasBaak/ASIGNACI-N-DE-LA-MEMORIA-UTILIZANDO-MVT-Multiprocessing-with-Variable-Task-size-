@@ -26,59 +26,31 @@ public class hilos extends javax.swing.JPanel {
         this.listaDoble=listaDoble;
     }
     
-     public void paint(Graphics g){
-    super.paint(g);
-        
-        int disNodo = 30,aumentoNodo = 80;
-        
-        int disNombre = 40,aumentoNombre= 82;
-        
-        for (int i = 0; i < cont; i++) {
-        
-            if(i == 0) g.setColor(Color.BLUE);
-            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
-            else g.setColor(Color.GRAY);
-            g.fillRect(50, disNodo , 160, 70);
-            disNodo += aumentoNodo;
-            
-            this.setSize(disNodo+200, 21);
-                                    
-            g.setColor(Color.black); 
-            g.drawString(String.valueOf(disNodo), 30, disNodo-10);
-            g.drawString(listaDoble.get(i).dato.getNombreProceso(), 30, disNombre);
-            
-//            g.setColor(Color.orange);
-//            g.drawString(String.valueOf(tiempoespera), disNombre, 190);
-            this.repaint();
+//     public void paint(Graphics g){
+//    super.paint(g);
+//        
+//        int disNodo = 30,aumentoNodo = 80;       
+//        int disNombre = 40,aumentoNombre= 82;
+//        for (int i = 0; i < cont; i++) {
+//            
+//            if(i == 0) g.setColor(Color.BLUE);
+//            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
+//            else g.setColor(Color.GRAY);
+//            g.fillRect(50, disNodo , 160, 70);
+//            disNodo += aumentoNodo;
+//            
+//            this.setSize(disNodo+200, 21); 
+//            g.setColor(Color.black); 
+//            g.drawString(String.valueOf(disNodo), 30, disNodo-10);
+//            g.drawString(listaDoble.get(i).dato.getNombreProceso(), 30, disNombre);
+//
+//            this.repaint();
+//            disNombre += aumentoNombre;
+//        }
+//
+//    }
 
-            disNombre += aumentoNombre;
-        
-            
-            
-        }
-        disNombre=50;
-        aumentoNombre=115;
-            int t = 0;
-            double r=0;
-            int tiempoespera=0;
-            for(int j=0;j<listaDoble.size();j++){
-                if(j==0){
-                  tiempoespera+=listaDoble.get(j).dato.getLocalidad()+listaDoble.get(j).dato.getTama();
-                  t = listaDoble.get(j).dato.getLocalidad();
-                  g.setColor(Color.orange);
-                  g.drawString(String.valueOf(t), disNombre, 150);
-                }else{
-                    g.setColor(Color.orange);
-                    g.drawString(String.valueOf(tiempoespera), disNombre, 150);
-                    tiempoespera+=listaDoble.get(j).dato.getLocalidad();
-                }  
-                disNombre += aumentoNombre;
-            }
-        g.setColor(Color.orange);
-        g.drawString(String.valueOf(tiempoespera), disNombre, 150);
-
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

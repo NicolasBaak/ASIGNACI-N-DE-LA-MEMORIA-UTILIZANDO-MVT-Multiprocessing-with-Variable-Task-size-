@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.listaDoble;
 import controlador.mvt;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 import modelo.valores;
 
 public class controlador extends javax.swing.JFrame {
@@ -27,6 +28,8 @@ public class controlador extends javax.swing.JFrame {
     public void tabla() {
         String cabecera[] = {"Numero", "Localidad", "Tamaño", "Estado"};
         tal = new DefaultTableModel(null, cabecera);
+      
+        
         jTableTal.setModel(tal);
 
         String cabecera2[] = {"Numero", "Localidad", "Tamaño", "Estado", "Proceso"};
@@ -36,16 +39,23 @@ public class controlador extends javax.swing.JFrame {
 
     public controlador() {
         initComponents();
+       // this.getContentPane().setBackground(Color.orange);
         tabla();
         obtenerDatosTablaPrincipal();
+        this.getContentPane().setBackground(Color.orange);
         this.setLocationRelativeTo(null);
         valores.numeroPasos = 1;
         valores.contadortp = 0;
         valores.ant_contadortal = valores.contadortal;
         valores.i = 0;
         
-        jScrollGrafico.setViewportView(new hilos(listaDoble.size(), listaDoble));
-  
+       
+        modelo.controlador so = new modelo.controlador(1, 10, 54, 'D');
+        talListaDoble.insertarFinal(so);
+        insertarDatoTablaTal(talListaDoble);
+         
+        jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
+        
     }
 
     /**
@@ -70,6 +80,8 @@ public class controlador extends javax.swing.JFrame {
         jScrollGrafico = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulacion de asignación de memoria con MVT");
+        setBackground(java.awt.Color.orange);
 
         jTablePrincipal.setBackground(new java.awt.Color(204, 255, 204));
         jTablePrincipal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -86,10 +98,17 @@ public class controlador extends javax.swing.JFrame {
                 "Proceso", "Tamaño", "Tiempo de llegada", "Title 4Duración (Tiempo en que finaliza)"
             }
         ));
-        jTablePrincipal.setAlignmentX(1.0F);
+        jTablePrincipal.setToolTipText("");
+        jTablePrincipal.setAlignmentY(5.0F);
+        jTablePrincipal.setEnabled(false);
+        jTablePrincipal.setFocusable(false);
+        jTablePrincipal.setSelectionForeground(new java.awt.Color(153, 255, 204));
+        jTablePrincipal.getTableHeader().setResizingAllowed(false);
+        jTablePrincipal.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablePrincipal);
 
         jTableTal.setBackground(new java.awt.Color(204, 255, 204));
+        jTableTal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTal.setForeground(new java.awt.Color(0, 0, 0));
         jTableTal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,9 +119,14 @@ public class controlador extends javax.swing.JFrame {
             }
         ));
         jTableTal.setToolTipText("");
+        jTableTal.setEnabled(false);
+        jTableTal.setFocusable(false);
+        jTableTal.getTableHeader().setResizingAllowed(false);
+        jTableTal.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableTal);
 
         jTableTp.setBackground(new java.awt.Color(204, 255, 204));
+        jTableTp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTp.setForeground(new java.awt.Color(0, 0, 0));
         jTableTp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +136,10 @@ public class controlador extends javax.swing.JFrame {
 
             }
         ));
+        jTableTp.setEnabled(false);
+        jTableTp.setFocusable(false);
+        jTableTp.getTableHeader().setResizingAllowed(false);
+        jTableTp.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableTp);
 
         jButtonPaso.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -136,9 +164,9 @@ public class controlador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -155,15 +183,15 @@ public class controlador extends javax.swing.JFrame {
                                         .addGap(166, 166, 166))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelTp)
-                                        .addGap(142, 142, 142)))
+                                        .addGap(143, 143, 143)))
                                 .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(101, 101, 101))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                                .addGap(101, 101, 101)))
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,10 +208,10 @@ public class controlador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelTp)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,13 +226,7 @@ public class controlador extends javax.swing.JFrame {
 
         
         if (finalizado  == 'f') {
-            if (valores.numeroPasos == 1) {
-                //Inserto el bloque del Sistema operativo
-                modelo.controlador so = new modelo.controlador(1, 10, 54, 'D');
-                // System.out.println(so.getNumero() + " "+ so.getLocalidad()+" "+ so.getTama()+" "+ so.getEstado());
-                talListaDoble.insertarFinal(so);
-                // valores.contadortal++;         
-            }
+            
                      
             jButtonPaso.setText("Paso " + valores.numeroPasos);
             n.mvt(valores, talListaDoble, tpListaDoble);
@@ -216,10 +238,14 @@ public class controlador extends javax.swing.JFrame {
             }
             insertarDatoTablaTp(tpListaDoble);
             insertarDatoTablaTal(talListaDoble);
-           finalizado = n.finish(n.getFinalizado(), tpListaDoble);
-       
+            finalizado = n.finish(n.getFinalizado(), tpListaDoble);
+            //actualizarGrafico(talListaDoble, tpListaDoble);
+            eliminAreasLibres(talListaDoble);  
+            jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
+        
         } else if (finalizado  == 't') {
             //Deben ser aproximadamente 10 pasos para acabar
+             eliminAreasLibres(talListaDoble);
             jButtonPaso.setText("Finalizada");
             finalizado  = 'x';
             valores.numeroPasos++;
@@ -228,6 +254,51 @@ public class controlador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPasoActionPerformed
 
+    public void eliminAreasLibres(listaDoble tal){
+    
+        for(int i = 0; i < tal.size(); i++){
+            
+            
+                  
+            if(tal.size() > 0){
+              for(int j = 1; j < tal.size(); j++){
+                                    
+                  if(tal.get(j).dato.getTama() == 0){
+                  tal.eliminarEntreNodos(j);
+                  --valores.contadortal;                  
+                  }
+
+                  if(tal.get(i).dato.getLocalidad() == (tal.get(j).dato.getLocalidad()+tal.get(j).dato.getTama()) || tal.get(j).dato.getLocalidad() == (tal.get(i).dato.getLocalidad()+tal.get(i).dato.getTama())){
+                  int numero;
+                  int localidad;
+                  int tama;
+                  char estado = 'D';
+                  
+                  if(tal.get(i).dato.getLocalidad() > tal.get(j).dato.getLocalidad())
+                    localidad = tal.get(j).dato.getLocalidad();
+                  else
+                    localidad = tal.get(i).dato.getLocalidad();
+                  
+                  tama = tal.get(i).dato.getTama() + tal.get(j).dato.getTama();
+                  
+                  
+                 if(tal.get(i).dato.getNumero() > tal.get(j).dato.getNumero())
+                    numero = tal.get(j).dato.getNumero();
+                  else
+                    numero = tal.get(i).dato.getNumero();
+                   
+                   modelo.controlador a = new modelo.controlador(numero, localidad, tama, estado);
+                   
+                   tal.insertarFinal(a); 
+                   tal.eliminarEntreNodos(j);
+                   tal.eliminarEntreNodos(i); 
+                   --valores.contadortal;
+                  }
+              }  
+            } 
+        }
+    
+    }
 //Obtengo los valores de la tabla principal
     public void obtenerDatosTablaPrincipal() {
         //System.out.println("\t Nombre \t tama \t tiempoLlegada \t Duracion \n\n");       
@@ -328,7 +399,10 @@ public class controlador extends javax.swing.JFrame {
     public void actualizarGrafico(listaDoble tal, listaDoble tp)
     {
            jScrollGrafico.setBackground(Color.lightGray);
+           
+           if(tal.size() >= 0 && tp.size() >= 0){
            jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
+           }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;
