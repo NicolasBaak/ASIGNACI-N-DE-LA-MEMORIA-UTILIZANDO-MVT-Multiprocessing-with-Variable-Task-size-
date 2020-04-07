@@ -55,21 +55,11 @@ public class hilos extends javax.swing.JPanel {
            char aux = 't';
            posiciones[i+1] = disNodo;
             int j = 1;
-            while(j < tp.size()){
-            if(tp.get(j).dato.getEstado() == 'A' & tp.get(j).dato.getTama()>tp.get(i).dato.getTama() && posiciones[j+1] == 240)
-            {
-            g.setColor(Color.BLUE);
-            g.fillRect(50, posiciones[j+2] , 160, 30);
-            g.setColor(Color.white);   
-            g.drawString("Aqui ando: "+String.valueOf(posiciones[j+1]+20), 120, posiciones[j+1]+20); 
-           
-            }
-            j++;
-            } 
+            
             if(tp.get(i).dato.getEstado()== 'A')
                 g.setColor(Color.BLUE);
-  //          else if(tp.get(i+1).dato.getEstado() == 'D')
-  //             g.setColor(Color.GRAY);
+//            else if(tp.get(i+1).dato != null && tp.get(i+1).dato.getEstado() == 'D' )
+//              g.setColor(Color.GRAY);
             else
                g.setColor(Color.RED);
             if(aux == 't' && disNodo < 355){
@@ -78,18 +68,33 @@ public class hilos extends javax.swing.JPanel {
             this.setSize(disNodo+200, 21); 
             g.setColor(Color.black); 
             g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()), 30, disNombre);
-            
+            disNombre += aumentoNombre;
+            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()+tp.get(i).dato.getTama()), 30, disNombre);
+             
             g.setColor(Color.WHITE); 
             if(tp.get(i).dato.getEstado()== 'A')
             g.drawString("P"+String.valueOf(tp.get(i).dato.getProceso()), 120, disNombreProceso);
-            
+           
             aux = 't';
             }
            
             
+            
             disNodo += aumentoNodo;
-            disNombre += aumentoNombre;
+           
             disNombreProceso += aumentoNombreProceso;
+        }
+        
+        for(int i = 0; i < tp.size(); i++){
+            for(int j = 1; j < tp.size(); j++){
+            if(tp.get(i).dato.getLocalidad() == tp.get(j).dato.getLocalidad() && tp.get(i).dato.getTama() > tp.get(i).dato.getTama() 
+                    && tp.get(i).dato.getEstado() == 'D' && tp.get(j).dato.getEstado() == 'A' ){
+            
+            
+            }
+                
+            }
+        
         }
         //Pintando los rectangulos grices y rojos de los espacios de tal 
         char finish='t';

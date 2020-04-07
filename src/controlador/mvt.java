@@ -51,7 +51,7 @@ public class mvt {
                     localidad = tal.get(au).dato.getLocalidad();
                     tal.get(au).dato.setLocalidad(tal.get(au).dato.getLocalidad() + listaDoble.get(v.i).dato.getTama() );
                     tal.get(au).dato.setTama( tal.get(au).dato.getTama() - listaDoble.get(v.i).dato.getTama());      
-                    tal.imprimirTal();
+                 
                 }
                 int tamaño = listaDoble.get(v.i).dato.getTama();
                 char estado = 'A';

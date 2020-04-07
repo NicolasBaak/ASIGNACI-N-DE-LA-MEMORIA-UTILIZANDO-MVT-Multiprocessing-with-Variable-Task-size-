@@ -228,11 +228,9 @@ public class controlador extends javax.swing.JFrame {
 
         mvt n = new mvt(listaDoble);
     private void jButtonPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasoActionPerformed
-
-                  
+         
         if (finalizado  == 'f') {
          
-             
             jButtonPaso.setText("Paso " + valores.numeroPasos);
             n.mvt(valores, talListaDoble, tpListaDoble);    
             
@@ -246,7 +244,6 @@ public class controlador extends javax.swing.JFrame {
              
             eliminAreasLibres(talListaDoble);      
             insertarDatoTablaTal(talListaDoble);  
-            actualizarGrafico(talListaDoble, tpListaDoble);
          
              
          } else if (finalizado  == 't') {      
@@ -430,11 +427,13 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
      }
 
     public void insertarDatoTablaTp(listaDoble tp) {
+        jScrollGrafico.setViewportView(new hilos(talListaDoble, tpListaDoble));
         
         vaciarTabla(this.tp); 
         for(int i = 0; i < tp.size(); i++){
         String datosTal[] = new String[6];
 
+        
         datosTal[0] = String.valueOf(tp.get(i).dato.getNumero());
         //System.out.println(tp.get(i).dato.getNumero());
         datosTal[1] = String.valueOf(tp.get(i).dato.getLocalidad());
@@ -458,11 +457,6 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
         }
     }
     
-    public void actualizarGrafico(listaDoble tal, listaDoble tp)
-    {
-           
-        jScrollGrafico.setViewportView(new hilos(tal, tp));
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;
     private javax.swing.JLabel jLabelMvt;
