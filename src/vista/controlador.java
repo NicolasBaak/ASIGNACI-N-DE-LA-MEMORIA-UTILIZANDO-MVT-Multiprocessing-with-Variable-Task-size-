@@ -95,7 +95,7 @@ public class controlador extends javax.swing.JFrame {
                 {"E", "14", "5", "5"}
             },
             new String [] {
-                "Proceso", "Tamaño", "Tiempo de llegada", "Title 4Duración (Tiempo en que finaliza)"
+                "Proceso", "Tamaño", "Tiempo de llegada", "Duración (Tiempo en que finaliza)"
             }
         ));
         jTablePrincipal.setToolTipText("");
@@ -108,7 +108,7 @@ public class controlador extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTablePrincipal);
 
         jTableTal.setBackground(new java.awt.Color(204, 255, 204));
-        jTableTal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTableTal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableTal.setForeground(new java.awt.Color(0, 0, 0));
         jTableTal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,7 +126,7 @@ public class controlador extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTableTal);
 
         jTableTp.setBackground(new java.awt.Color(204, 255, 204));
-        jTableTp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTableTp.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTableTp.setForeground(new java.awt.Color(0, 0, 0));
         jTableTp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +142,7 @@ public class controlador extends javax.swing.JFrame {
         jTableTp.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTableTp);
 
-        jButtonPaso.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButtonPaso.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jButtonPaso.setText("Empezar");
         jButtonPaso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,33 +165,29 @@ public class controlador extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabelTal)
-                                                .addGap(136, 136, 136))
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(166, 166, 166))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelTp)
-                                        .addGap(143, 143, 143)))
-                                .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(101, 101, 101)))
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(118, 118, 118)
+                                    .addComponent(jLabelTal))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(135, 135, 135)
+                                    .addComponent(jLabelTp))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(117, 117, 117)
+                                    .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(15, 15, 15))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(114, 114, 114)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,19 +199,17 @@ public class controlador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(23, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelTp)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                        .addComponent(jLabelTp)
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,14 +232,12 @@ public class controlador extends javax.swing.JFrame {
             eliminAreasLibresIguales( talListaDoble);   
             insertarDatoTablaTp(tpListaDoble);
             insertarDatoTablaTal(talListaDoble);
-            finalizado = n.finish(n.getFinalizado(), tpListaDoble);
-            //actualizarGrafico(talListaDoble, tpListaDoble);
+            finalizado = n.finish(n.getFinalizado(), tpListaDoble, talListaDoble);
+            actualizarGrafico(talListaDoble, tpListaDoble);
          
              
-            jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
-        
-        } else if (finalizado  == 't') {      
-            avanzaTiempo(tpListaDoble,talListaDoble, valores);
+         } else if (finalizado  == 't') {      
+             avanzaTiempo(tpListaDoble,talListaDoble, valores);
              eliminAreasLibresIguales( talListaDoble);   
              insertarDatoTablaTal(talListaDoble);
              
@@ -253,7 +245,7 @@ public class controlador extends javax.swing.JFrame {
             finalizado  = 'x';
             valores.numeroPasos++;
         } else {
-                avanzaTiempo(tpListaDoble,talListaDoble, valores);
+             avanzaTiempo(tpListaDoble,talListaDoble, valores);
              eliminAreasLibresIguales( talListaDoble);   
              insertarDatoTablaTal(talListaDoble);
              
@@ -294,7 +286,6 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
                   char estado = 'D';
                  
                   if(tal.get(i).dato.getLocalidad() == tal.get(j).dato.getLocalidad() && tal.get(i).dato.getNumero() != tal.get(j).dato.getNumero()){
-                      System.out.println("Entre para eliminar unas localidades iguales ");
                     localidad = tal.get(i).dato.getLocalidad();
                     if(tal.get(i).dato.getTama() > tal.get(i).dato.getTama())
                       tama = tal.get(i).dato.getTama();
@@ -456,13 +447,11 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
         tabla.removeRow(0);
         }
     }
+    
     public void actualizarGrafico(listaDoble tal, listaDoble tp)
     {
-           jScrollGrafico.setBackground(Color.lightGray);
            
-           if(tal.size() >= 0 && tp.size() >= 0){
-           jScrollGrafico.setViewportView(new dibujos(listaDoble.size(), listaDoble));
-           }
+        jScrollGrafico.setViewportView(new hilos(tal, tp));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPaso;

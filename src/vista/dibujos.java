@@ -61,57 +61,25 @@ public class dibujos extends javax.swing.JPanel {
     
      public void paint(Graphics g){
       super.paint(g);
-        
-        int disNodo = 15,aumentoNodo = 75;       
-        int disNombre = 20,aumentoNombre= 80;
+          int disNodo = 15, aumentoNodo = 75;       
+        int disNombre = 20,aumentoNombre= 73; 
         int disNombreProceso = 50,aumentoNombreProceso= 80;
-        
-        if(tal.size() == 0){
-            g.setColor(Color.BLUE);
+             g.setColor(Color.BLUE);
             g.fillRect(50, disNodo , 160, 70);
-            
             this.setSize(disNodo+200, 21); 
-            
             g.setColor(Color.black); 
-           // g.drawString(String.valueOf(disNodo), 30, disNodo-10);
             g.drawString("0", 30, disNombre);
-            g.setColor(Color.white);
+            g.setColor(Color.white);   
+            
             g.drawString("SO", 120, disNombreProceso);
             disNodo +=  aumentoNodo;
             disNombre += aumentoNombre;
-            
             g.setColor(Color.GRAY);
             g.fillRect(50, disNodo , 160, 340);
-            
             this.setSize(disNodo+200, 21); 
-            g.setColor(Color.black); 
-            //g.drawString(String.valueOf(disNodo), 30,100);
-            g.drawString("10", 30, disNombre); 
-            g.drawString("64", 30, 420);
-        }else{
-            g.setColor(Color.BLUE);
-            g.fillRect(50, disNodo , 160, 70 +tal.get(0).dato.getTama());
-            
-            this.setSize(disNodo+200, 21); 
-            
-            g.setColor(Color.black); 
-           // g.drawString(String.valueOf(disNodo), 30, disNodo-10);
-            g.drawString("0", 30, disNombre);
-            g.setColor(Color.white);
-            g.drawString("SO", 120, disNombreProceso);
-            disNodo +=  aumentoNodo;
-            disNombre += aumentoNombre;
-            
-            g.setColor(Color.GRAY);
-            g.fillRect(50, disNodo , 160, 340);
-            
-            this.setSize(disNodo+200, 21); 
-            g.setColor(Color.black); 
-            //g.drawString(String.valueOf(disNodo), 30,100);
-            g.drawString("10", 30, disNombre); 
-            g.drawString("64", 30, 420);
-        
-        }
+            g.setColor(Color.black);    g.drawString("10", 30, disNombre); 
+            g.drawString("64", 30, 430);  
+       
      }
     /**
      * This method is called from within the constructor to initialize the form.

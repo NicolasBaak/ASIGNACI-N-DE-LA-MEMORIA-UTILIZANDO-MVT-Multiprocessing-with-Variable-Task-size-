@@ -12,43 +12,93 @@ import sun.awt.windows.ThemeReader;
 
 public class hilos extends javax.swing.JPanel {
 
-     String nombre;
-    int cont=0;
-    listaDoble listaDoble=new listaDoble();
+    String nombre;
+    listaDoble tal =new listaDoble();
+    listaDoble tp = new listaDoble();
     
-    public hilos(int cont,listaDoble listaDoble) {
+    public hilos(listaDoble tal, listaDoble tp) {
         initComponents();
         this.setOpaque(true);
         this.setSize(new Dimension(20,1000));
         this.setPreferredSize(new Dimension(20, 1000));
-        this.setBackground(Color.LIGHT_GRAY);
-        this.cont=cont;
-        this.listaDoble=listaDoble;
+        this.tal = tal;
+        this.tp = tp;
     }
     
-//     public void paint(Graphics g){
-//    super.paint(g);
-//        
-//        int disNodo = 30,aumentoNodo = 80;       
-//        int disNombre = 40,aumentoNombre= 82;
-//        for (int i = 0; i < cont; i++) {
+    public void paint(Graphics g){
+    super.paint(g);
+    
+        //Pintando los rectangulos azules de los procesos tp
+        int disNodo = 15, aumentoNodo = 75;       
+        int disNombre = 20,aumentoNombre= 73; 
+        int disNombreProceso = 50, aumentoNombreProceso= 80;
+            g.setColor(Color.BLUE);
+            g.fillRect(50, disNodo , 160, 70);
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black); 
+            g.drawString("0", 30, disNombre);
+            g.setColor(Color.white);   
+            g.drawString("SO", 120, disNombreProceso);
+            disNodo +=  aumentoNodo;
+            disNombre += aumentoNombre;
+            g.setColor(Color.GRAY);
+            g.fillRect(50, disNodo , 160, 340);
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black);    g.drawString("10", 30, disNombre); 
+            g.drawString("64", 30, 430);            
+           
+            disNodo = 90;
+            aumentoNodo = 75;       
+            disNombre = 93;
+            aumentoNombre= 73;
+            
+        for (int i = 0; i < tp.size(); i++) {  
+           char aux = 't';
+           
+//            for(int j = 1; j < tp.size(); j++){
+//            if(tp.get(i).dato.getLocalidad() == tp.get(j).dato.getLocalidad())
+//                aux = 'f';
+//            }
+
+            if(aux == 't'){
+            if(tp.get(i).dato.getEstado()== 'A')
+                g.setColor(Color.BLUE);
+            else
+               g.setColor(Color.RED); 
+            g.fillRect(50, disNodo , 160, 70);
+            disNodo += aumentoNodo;
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black); 
+            
+            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()), 30, disNombre);
+            this.repaint();
+            disNombre += aumentoNombre;
+            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()+tp.get(i).dato.getTama()), 30, disNombre);
+            }             
+        }
+        //Pintando los rectangulos grices y rojos de los espacios de tal 
+//         disNodo = 30;
+//         aumentoNodo = 80;       
+//         disNombre = 40;
+//         aumentoNombre= 82;
+//        for (int i = 0; i < tal.size(); i++) {
 //            
-//            if(i == 0) g.setColor(Color.BLUE);
+//            g.setColor(Color.BLUE);
 //            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
-//            else g.setColor(Color.GRAY);
+//           
 //            g.fillRect(50, disNodo , 160, 70);
 //            disNodo += aumentoNodo;
 //            
 //            this.setSize(disNodo+200, 21); 
 //            g.setColor(Color.black); 
-//            g.drawString(String.valueOf(disNodo), 30, disNodo-10);
-//            g.drawString(listaDoble.get(i).dato.getNombreProceso(), 30, disNombre);
+//            g.drawString(String.valueOf(disNodo), 30, disNodo-10); 
+//            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()), 30, disNombre);
 //
 //            this.repaint();
 //            disNombre += aumentoNombre;
 //        }
-//
-//    }
+
+    }
 
     
     /**

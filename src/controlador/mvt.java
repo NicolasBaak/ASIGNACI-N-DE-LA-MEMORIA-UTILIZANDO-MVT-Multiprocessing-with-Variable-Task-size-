@@ -140,14 +140,20 @@ public class mvt {
         }       
     }
 
-    public char finish(char finalizar, listaDoble tp) {
+    public char finish(char finalizar, listaDoble tp, listaDoble tal) {
         listaDoble aux = tp;
         finalizar = 't';
         for (int i = 0; i < tp.size(); i++) {
             if (aux.get(i).dato.getEstado() == 'A') {
                 finalizar = 'f';
             }
-            //aux.get(i).dato = aux.get(i).siguiente.dato;
+            
+        }
+        
+        if(finalizar == 't'){
+        tal.get(0).dato.setLocalidad(10);
+        tal.get(0).dato.setTama(64); 
+        tal.get(0).dato.setNumero(1); 
         }
         return finalizar;
     }
