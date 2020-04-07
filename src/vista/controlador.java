@@ -32,7 +32,7 @@ public class controlador extends javax.swing.JFrame {
         
         jTableTal.setModel(tal);
 
-        String cabecera2[] = {"Numero", "Localidad", "Tamaño", "Estado", "Proceso"};
+        String cabecera2[] = {"Numero", "Localidad", "Tamaño", "Estado", "Duracion", "Proceso"};
         tp = new DefaultTableModel(null, cabecera2);
         jTableTp.setModel(tp);
     }
@@ -46,6 +46,7 @@ public class controlador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         valores.numeroPasos = 1;
         valores.contadortp = 0;
+        valores.contadortal = 0;
         valores.ant_contadortal = valores.contadortal;
         valores.i = 0;
         
@@ -150,65 +151,75 @@ public class controlador extends javax.swing.JFrame {
             }
         });
 
-        jLabelMvt.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabelMvt.setFont(new java.awt.Font("Dialog", 1, 27)); // NOI18N
+        jLabelMvt.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMvt.setText("SIMULACIÓN DE ASIGNACIÓN DE MEMORIA CON MVT");
 
-        jLabelTal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabelTal.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabelTal.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTal.setText("Tabla Áreas Libres (TAL[ ] )");
 
-        jLabelTp.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabelTp.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabelTp.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTp.setText("Tabla Particiones (TP[ ] )");
+
+        jScrollGrafico.setAutoscrolls(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(118, 118, 118)
-                                    .addComponent(jLabelTal))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(135, 135, 135)
-                                    .addComponent(jLabelTp))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(117, 117, 117)
-                                    .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(15, 15, 15))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(114, 114, 114)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(117, 117, 117)
+                                        .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(27, 27, 27))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(76, 76, 76)
+                                        .addComponent(jLabelTal))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(jLabelTp)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jLabelMvt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabelTal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelTp)
-                        .addGap(20, 20, 20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelTp, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonPaso, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -220,19 +231,21 @@ public class controlador extends javax.swing.JFrame {
 
                   
         if (finalizado  == 'f') {
+         
              
             jButtonPaso.setText("Paso " + valores.numeroPasos);
-            n.mvt(valores, talListaDoble, tpListaDoble);
-           // System.out.println("i =" + valores.i + " - contadortal -" + (valores.contadortal + 1) + " - contadortp -" + valores.contadortp + " - ant_contadortal -" + (valores.ant_contadortal + 1) + "\n -----------------------------");
+            n.mvt(valores, talListaDoble, tpListaDoble);    
             
             if (valores.i >= 5) {
                 valores.i = 0;
             }
-            eliminAreasLibres(talListaDoble);
+            finalizado = n.finish(finalizado, tpListaDoble, talListaDoble);
+           
             eliminAreasLibresIguales( talListaDoble);   
             insertarDatoTablaTp(tpListaDoble);
-            insertarDatoTablaTal(talListaDoble);
-            finalizado = n.finish(n.getFinalizado(), tpListaDoble, talListaDoble);
+             
+            eliminAreasLibres(talListaDoble);      
+            insertarDatoTablaTal(talListaDoble);  
             actualizarGrafico(talListaDoble, tpListaDoble);
          
              
@@ -316,10 +329,6 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
             if(tal.size() > 0){
               for(int j = 1; j < tal.size(); j++){
                                     
-//                  if(tal.get(j).dato.getTama() == 0){
-//                  tal.eliminarEntreNodos(j);
-//                  --valores.contadortal;                  
-//                  }
                   int numero;
                   int localidad;
                   int tama;
@@ -424,7 +433,7 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
         
         vaciarTabla(this.tp); 
         for(int i = 0; i < tp.size(); i++){
-        String datosTal[] = new String[5];
+        String datosTal[] = new String[6];
 
         datosTal[0] = String.valueOf(tp.get(i).dato.getNumero());
         //System.out.println(tp.get(i).dato.getNumero());
@@ -436,6 +445,7 @@ public void avanzaTiempo(listaDoble tp, listaDoble tal, modelo.valores v) {
         //System.out.println(tp.get(i).dato.getEstado());
         datosTal[4] = String.valueOf(tp.get(i).dato.getDuracion());
         //System.out.println(tp.get(i).dato.getProgreso());
+        datosTal[5] = "P"+String.valueOf(tp.get(i).dato.getProceso());
         this.tp.addRow(datosTal);
         }
         

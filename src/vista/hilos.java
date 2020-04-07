@@ -26,10 +26,11 @@ public class hilos extends javax.swing.JPanel {
     }
     
     public void paint(Graphics g){
-    super.paint(g);
-    
+        super.paint(g);
+        int  posiciones[] = new int[10];
+         posiciones[0] = 15;
         //Pintando los rectangulos azules de los procesos tp
-        int disNodo = 15, aumentoNodo = 75;       
+        int disNodo = 15, aumentoNodo = 75;  
         int disNombre = 20,aumentoNombre= 73; 
         int disNombreProceso = 50, aumentoNombreProceso= 80;
             g.setColor(Color.BLUE);
@@ -47,57 +48,75 @@ public class hilos extends javax.swing.JPanel {
             g.setColor(Color.black);    g.drawString("10", 30, disNombre); 
             g.drawString("64", 30, 430);            
            
-            disNodo = 90;
-            aumentoNodo = 75;       
+            disNodo = 90;       
             disNombre = 93;
-            aumentoNombre= 73;
-            
+            disNombreProceso =130;
         for (int i = 0; i < tp.size(); i++) {  
            char aux = 't';
+           posiciones[i+1] = disNodo;
+            int j = 1;
+            while(j < tp.size()){
+            if(tp.get(j).dato.getEstado() == 'A' & tp.get(j).dato.getTama()>tp.get(i).dato.getTama() && posiciones[j+1] == 240)
+            {
+            g.setColor(Color.BLUE);
+            g.fillRect(50, posiciones[j+2] , 160, 30);
+            g.setColor(Color.white);   
+            g.drawString("Aqui ando: "+String.valueOf(posiciones[j+1]+20), 120, posiciones[j+1]+20); 
            
-//            for(int j = 1; j < tp.size(); j++){
-//            if(tp.get(i).dato.getLocalidad() == tp.get(j).dato.getLocalidad())
-//                aux = 'f';
-//            }
-
-            if(aux == 't'){
+            }
+            j++;
+            } 
             if(tp.get(i).dato.getEstado()== 'A')
                 g.setColor(Color.BLUE);
+  //          else if(tp.get(i+1).dato.getEstado() == 'D')
+  //             g.setColor(Color.GRAY);
             else
-               g.setColor(Color.RED); 
+               g.setColor(Color.RED);
+            if(aux == 't' && disNodo < 355){
             g.fillRect(50, disNodo , 160, 70);
-            disNodo += aumentoNodo;
+            
             this.setSize(disNodo+200, 21); 
             g.setColor(Color.black); 
-            
             g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()), 30, disNombre);
-            this.repaint();
+            
+            g.setColor(Color.WHITE); 
+            if(tp.get(i).dato.getEstado()== 'A')
+            g.drawString("P"+String.valueOf(tp.get(i).dato.getProceso()), 120, disNombreProceso);
+            
+            aux = 't';
+            }
+           
+            
+            disNodo += aumentoNodo;
             disNombre += aumentoNombre;
-            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()+tp.get(i).dato.getTama()), 30, disNombre);
-            }             
+            disNombreProceso += aumentoNombreProceso;
         }
         //Pintando los rectangulos grices y rojos de los espacios de tal 
-//         disNodo = 30;
-//         aumentoNodo = 80;       
-//         disNombre = 40;
-//         aumentoNombre= 82;
-//        for (int i = 0; i < tal.size(); i++) {
-//            
-//            g.setColor(Color.BLUE);
-//            //g.drawImage(img.getImage(), disNodo, 35, 170, 50, this);
-//           
-//            g.fillRect(50, disNodo , 160, 70);
-//            disNodo += aumentoNodo;
-//            
-//            this.setSize(disNodo+200, 21); 
-//            g.setColor(Color.black); 
-//            g.drawString(String.valueOf(disNodo), 30, disNodo-10); 
-//            g.drawString(String.valueOf(tp.get(i).dato.getLocalidad()), 30, disNombre);
-//
-//            this.repaint();
-//            disNombre += aumentoNombre;
-//        }
-
+        char finish='t';
+        for (int i = 0; i < tp.size(); i++) {
+           if(tp.get(i).dato.getEstado() == 'A')
+               finish = 'f';
+        }
+        if(finish == 't'){
+         disNodo = 15;           
+         disNombre = 20;
+         disNombreProceso = 50;
+            g.setColor(Color.BLUE);
+            g.fillRect(50, disNodo , 160, 70);
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black); 
+            g.drawString("0", 30, disNombre);
+            g.setColor(Color.white);   
+            g.drawString("SO", 120, disNombreProceso);
+            disNodo +=  aumentoNodo;
+            disNombre += aumentoNombre;
+            g.setColor(Color.GRAY);
+            g.fillRect(50, disNodo , 160, 340);
+            this.setSize(disNodo+200, 21); 
+            g.setColor(Color.black);    g.drawString("10", 30, disNombre); 
+            g.drawString("64", 30, 430); 
+        }
+         this.repaint();
     }
 
     
@@ -109,6 +128,8 @@ public class hilos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setAutoscrolls(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

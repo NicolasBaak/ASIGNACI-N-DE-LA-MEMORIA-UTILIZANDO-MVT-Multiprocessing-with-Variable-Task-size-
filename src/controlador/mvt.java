@@ -19,32 +19,40 @@ public class mvt {
 
     public void mvt(modelo.valores v, listaDoble tal, listaDoble tp) {
             
-        if (v.numeroPasos >= listaDoble.get(v.i).dato.getTiempoLlegada()) {
-           
             
+        if (v.numeroPasos >= listaDoble.get(v.i).dato.getTiempoLlegada()) {
+            char aux1 = 'f';
             int au = 0;
             
             while(listaDoble.get(v.i).dato.getTama()> tal.get(au).dato.getTama()) {
-               avanzaTiempo(tp, tal, v);  
+                avanzaTiempo(tp, tal, v);  
                 for( int i = 0; i < tal.size(); i++){
                     if(tal.get(i).dato.getTama() >=  listaDoble.get(v.i).dato.getTama()) 
                     {
                     au = i;
+                    aux1 = 't';
                     }
                 }
             }
-
+        
             if (v.contadortal == v.ant_contadortal) {
   
                 int a = tal.get(v.contadortal).dato.getLocalidad() + listaDoble.get(v.i).dato.getTama();
                 tal.get(v.contadortal).dato.setLocalidad(a);
                 tal.get(v.contadortal).dato.setTama(tal.get(v.contadortal).dato.getTama() - listaDoble.get(v.i).dato.getTama());
-                tal.get(v.contadortal).dato.setEstado('D');
             }
 
             if (v.contadortp < 5) {
+                int localidad;
                 int numero = v.contadortp + 1;
-                int localidad = tal.get(v.contadortal).dato.getLocalidad() - listaDoble.get(v.i).dato.getTama();
+                if( aux1 == 'f')
+                    localidad = tal.get(v.contadortal).dato.getLocalidad() - listaDoble.get(v.i).dato.getTama();
+                else{
+                    localidad = tal.get(au).dato.getLocalidad();
+                    tal.get(au).dato.setLocalidad(tal.get(au).dato.getLocalidad() + listaDoble.get(v.i).dato.getTama() );
+                    tal.get(au).dato.setTama( tal.get(au).dato.getTama() - listaDoble.get(v.i).dato.getTama());      
+                    tal.imprimirTal();
+                }
                 int tamaño = listaDoble.get(v.i).dato.getTama();
                 char estado = 'A';
                 int proceso = v.contadortp + 1;
@@ -54,13 +62,13 @@ public class mvt {
                 tp.insertarFinal(a);
                 v.contadortp++;
             }
-
-            avanzaTiempo(tp, tal, v);
+          
             v.ant_contadortal = v.contadortal;
             v.i++;
             
         }
         // listaDoble.get(i).dato = listaDoble.get(i).siguiente.dato;
+        avanzaTiempo(tp, tal, v);
         v.numeroPasos++;
 
     }
@@ -71,73 +79,17 @@ public class mvt {
             if (tp.get(i).dato.getDuracion() > 0) {
                 tp.get(i).dato.setDuracion(tp.get(i).dato.getDuracion() - 1);
             }
-
-            if (tp.get(i).dato.getDuracion() == 0) {
+            else{
                 if (tp.get(i).dato.getEstado() == 'A') {
                     v.contadortal++;
                     tp.get(i).dato.setEstado('D');
                     modelo.controlador a = new modelo.controlador(v.contadortal+1, tp.get(i).dato.getLocalidad(), tp.get(i).dato.getTama(), 'D');
                     tal.insertarFinal(a);
-                    
                 }
 
             }
 
         }
-
-    }
-    
-    public void fucionarTal(listaDoble tal, modelo.valores v){
-    
-        for(int i = 0; i < tal.size(); i++){
-        
-            for(int j = 1;j < tal.size()-1; j++){
-            
-            int aux = tal.get(j).dato.getTama() + tal.get(j).dato.getLocalidad();
-            if(tal.get(j).dato.getTama() <= 0){
-                tal.eliminarEntreNodos(j);
-                v.contadortal--;
-                for(int a = j; a < (tal.size()-j); a++ ) tal.get(a).dato.setNumero(tal.get(a).dato.getNumero()-1);
-            
-            } 
-            
-            if(tal.get(i).dato.getTama() == aux){
-            
-                int numero = tal.get(i).dato.getNumero();
-                int localidad;
-                int tama;
-                if(tal.get(j).dato.getLocalidad() < tal.get(i).dato.getLocalidad())
-                { localidad = tal.get(j).dato.getLocalidad();
-                  tama = tal.get(j).dato.getTama() + tal.get(i).dato.getTama()+tal.get(j).dato.getLocalidad();
-           
-                }
-                else{
-                 localidad = tal.get(i).dato.getLocalidad();
-                   tama = tal.get(j).dato.getTama() + tal.get(i).dato.getTama()+tal.get(i).dato.getLocalidad();
-                }
-            char estado = 'D';
-            modelo.controlador a = new modelo.controlador(numero, localidad, tama, estado);
-            tal.insertarInicio(a);
-            tal.eliminarEntreNodos(i);
-            tal.eliminarEntreNodos(j); 
-            v.contadortal--;
-            }
-            
-            
-            if(tal.get(i).dato.getLocalidad() == tal.get(j).dato.getLocalidad() && tal.get(j).dato.getTama() == tal.get(i).dato.getTama()){
-                if(tal.get(i).dato.getLocalidad() <= tal.get(j).dato.getNumero())
-                {
-                    tal.eliminarEntreNodos(j);
-                    v.contadortal--;
-                }
-                else{
-                    tal.eliminarEntreNodos(i);
-                    v.contadortal--;
-                }
-            }
-            
-            }   
-        }       
     }
 
     public char finish(char finalizar, listaDoble tp, listaDoble tal) {
@@ -147,23 +99,11 @@ public class mvt {
             if (aux.get(i).dato.getEstado() == 'A') {
                 finalizar = 'f';
             }
-            
         }
         
-        if(finalizar == 't'){
-        tal.get(0).dato.setLocalidad(10);
-        tal.get(0).dato.setTama(64); 
-        tal.get(0).dato.setNumero(1); 
-        }
+        if(tal.size() > 1)
+            finalizar = 'f';
         return finalizar;
-    }
-
-    public char getFinalizado() {
-        return finalizado;
-    }
-
-    public void setFinalizado(char finalizado) {
-        this.finalizado = finalizado;
     }
 
 }
