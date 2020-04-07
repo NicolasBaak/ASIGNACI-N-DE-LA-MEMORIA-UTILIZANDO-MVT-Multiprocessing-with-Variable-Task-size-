@@ -54,8 +54,20 @@ public class hilos extends javax.swing.JPanel {
         for (int i = 0; i < tp.size(); i++) {  
            char aux = 't';
            posiciones[i+1] = disNodo;
-            int j = 1;
-            
+           
+           if(tp.size()  > 2){
+            for(int j = 1; j < tp.size(); j++){
+            if(tp.get(i).dato.getLocalidad() == tp.get(j).dato.getLocalidad() &&  tp.get(2).dato.getEstado() == 'D'){
+           
+            g.setColor(Color.BLUE);
+            g.fillRect(50, 240 , 160, 30);
+            g.setColor(Color.white);   
+            g.drawString("P"+String.valueOf(tp.get(i).dato.getProceso()), 120, 260); 
+            g.setColor(Color.gray);
+           // g.fillRect(50, 270 , 160, 160);
+              }
+            }
+           }
             if(tp.get(i).dato.getEstado()== 'A')
                 g.setColor(Color.BLUE);
 //            else if(tp.get(i+1).dato != null && tp.get(i+1).dato.getEstado() == 'D' )
@@ -78,24 +90,11 @@ public class hilos extends javax.swing.JPanel {
             aux = 't';
             }
            
-            
-            
             disNodo += aumentoNodo;
            
             disNombreProceso += aumentoNombreProceso;
         }
         
-        for(int i = 0; i < tp.size(); i++){
-            for(int j = 1; j < tp.size(); j++){
-            if(tp.get(i).dato.getLocalidad() == tp.get(j).dato.getLocalidad() && tp.get(i).dato.getTama() > tp.get(i).dato.getTama() 
-                    && tp.get(i).dato.getEstado() == 'D' && tp.get(j).dato.getEstado() == 'A' ){
-            
-            
-            }
-                
-            }
-        
-        }
         //Pintando los rectangulos grices y rojos de los espacios de tal 
         char finish='t';
         for (int i = 0; i < tp.size(); i++) {
